@@ -43,7 +43,7 @@ Caso 1.g) Valor zero
 Caso 2 (big_comp2()):
  1 - função big_comp2()
  2 - verificar se a função big_comp2 está corretamente traduzindo o valor para o seu equivalente negativado
- 3 - 
+ 3 - Atribuimos x a um BigInt e, então -x a outro BigInt. Fazemos então a conferência do valor ser idêntico por um loop que verifica cada elemento.
  4 - res: array a ser preenchido com o novo valor, a: array com o valor antigo
  5 - um array contendo a representação do valor -a em 128 bits
 
@@ -57,10 +57,10 @@ Caso 1.g) Valor zero
 Caso 1.h) Valores maiores que 16 bytes (obs: depende da funcao big_sum())
 
 Caso 3 (big_sum()):
- 1 -
- 2 -
- 3 -
- 4 -
+ 1 - função big_sum()
+ 2 - verificar se a função está corretamente somando a e b, retornado em res
+ 3 - semelhante a do anterior
+ 4 - 
  5 -
 
 Caso 1.a) Dois numeros positivos de 8 bytes
@@ -69,3 +69,5 @@ Caso 1.c) Dois numeros positivos que juntos dao mais de 8 bytes
 Caso 1.d) Dois numeros negativos que juntos dao mais de 8 bytes
 Caso 1.e) Dois numeros negativos que juntos dao menos que BIGINT_MIN
 
+Caso 4 (big_sub()):
+ 1 - 
