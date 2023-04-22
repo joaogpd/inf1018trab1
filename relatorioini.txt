@@ -1,0 +1,71 @@
+Diagrama de Arquitetura de Módulos:
+
+- dois módulos: testebigint e bigint
+O módulo bigint tem as seguintes funções:
+
+void big_val (BigInt res, long val);
+void big_comp2(BigInt res, BigInt a);
+void big_sum(BigInt res, BigInt a, BigInt b);
+void big_sub(BigInt res, BigInt a, BigInt b);
+void big_mul(BigInt res, BigInt a, BigInt b);
+void big_shl(BigInt res, BigInt a, int n);
+void big_shr(BigInt res, BigInt a, int n);
+void big_sar(BigInt res, BigInt a, int n);
+
+O módulo testebigint tem as funções de teste:
+void compara(void* res, void* teste);
+
+Testes:
+
+Caso 1:
+ 1 - Identificação
+ 2 - Objetivo
+ 3 - Passo a passo
+ 4 - Parâmetros de entrada da função testada
+ 5 - Retorno esperado
+
+Caso 1 (big_val()): 
+ 1 - função big_val
+ 2 - ver se a função big_val está atribuindo o valor corretamente
+ 3 - realizamos a atribuição do valor ao BigInt e, depois, comparamos byte por byte na memória até 8 bytes para ver se está correta a tradução.
+Depois disso, confirmamos se o número é positivo ou negativo, e fazemos a verificação da extensão para 128 bits adequada ou nao
+ 4 - res: array a ser preenchido, val: valor a ser traduzido
+ 5 - um array contendo a representação do valor val em 128 bits (16 bytes), com a devida extensão
+
+Caso 1.a) Valor negativo pequeno
+Caso 1.b) Valor positivo grande 
+Caso 1.c) Valor negativo
+Caso 1.d) Valor positivo
+Caso 1.e) LONG_MAX
+Caso 1.f) LONG_MIN
+Caso 1.g) Valor zero
+
+Caso 2 (big_comp2()):
+ 1 - função big_comp2()
+ 2 - verificar se a função big_comp2 está corretamente traduzindo o valor para o seu equivalente negativado
+ 3 - 
+ 4 - res: array a ser preenchido com o novo valor, a: array com o valor antigo
+ 5 - um array contendo a representação do valor -a em 128 bits
+
+Caso 1.a) Valor negativo pequeno
+Caso 1.b) Valor positivo grande
+Caso 1.c) Valor negativo
+Caso 1.d) Valor positivo
+Caso 1.e) LONG_MAX
+Caso 1.f) LONG_MIN (obs: não é possível, visto que LONG_MAX = -(LONG_MIN) + 1)
+Caso 1.g) Valor zero
+Caso 1.h) Valores maiores que 16 bytes (obs: depende da funcao big_sum())
+
+Caso 3 (big_sum()):
+ 1 -
+ 2 -
+ 3 -
+ 4 -
+ 5 -
+
+Caso 1.a) Dois numeros positivos de 8 bytes
+Caso 1.b) Dois numeros negativos de 8 bytes
+Caso 1.c) Dois numeros positivos que juntos dao mais de 8 bytes
+Caso 1.d) Dois numeros negativos que juntos dao mais de 8 bytes
+Caso 1.e) Dois numeros negativos que juntos dao menos que BIGINT_MIN
+
