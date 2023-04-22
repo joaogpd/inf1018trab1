@@ -1,6 +1,7 @@
+include <stdio.h>
+#include <stdlib.h>
 #include "bigint.h"
 
-/* Atribuição (com extensão) */
 void big_val(BigInt res, long val){
     unsigned char* p = (unsigned char*)(&val);
     int i = 0;
@@ -14,9 +15,6 @@ void big_val(BigInt res, long val){
     }
 }
 
-/* Operações Aritméticas */
-
-/* res = -a */
 void big_comp2(BigInt res, BigInt a){
     int acres = 1;
     int boolAux;
@@ -30,8 +28,6 @@ void big_comp2(BigInt res, BigInt a){
     }
 }
 
-
-/* res = a + b */
 void big_sum(BigInt res, BigInt a, BigInt b){
     int acres = 0;
     for (int i = 0; i < NUM_BITS/8; i++){
@@ -42,26 +38,3 @@ void big_sum(BigInt res, BigInt a, BigInt b){
         acres = (sum+acres > 255); 
     }
 }
-
-/* res = a - b */
-void big_sub(BigInt res, BigInt a, BigInt b) {
-    BigInt btemp;
-    big_comp2(btemp, b);
-    big_sum(res, a, b);
-}
-
-/* res = a * b */
-void big_mul(BigInt res, BigInt a, BigInt b);
-
-/* Operações de Deslocamento */
-
-/* res = a << n */
-void big_shl(BigInt res, BigInt a, int n);
-
-/* res = a >> n (lógico)*/
-void big_shr(BigInt res, BigInt a, int n);
-
-/* res = a >> n (aritmético)*/
-void big_sar(BigInt res, BigInt a, int n);
-
-

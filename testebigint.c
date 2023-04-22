@@ -53,6 +53,15 @@ void teste_big_val(BigInt a, long b) {
 
 void teste_big_comp2(BigInt a, BigInt b, BigInt c, long d) {
     big_val(a, d);
+    if (d == LONG_MIN) {
+        BigInt temp1, temp2, temp3;
+        big_val(temp2, -(d + 1));
+        big_val(temp1, 1);
+        big_sum(temp3, temp2, temp1);
+        big_comp2(c, a); 
+        compare_big(temp3, c);
+        return;
+    }
     big_val(b, -d);
     big_comp2(c, a);
     compare_big(c, b);
@@ -72,11 +81,6 @@ void teste_big_sub(BigInt a, BigInt b, BigInt c, long d1, long d2) {
     big_val(a, d2);
     big_sub(c, a, b);
     big_val(a, d1 - d2);
-    printf("val\n");
-    dump(a, 16);
-    printf("sub\n");
-    dump(c, 16);
-    printf("\n");
     compare_big(a, c);
 }
 
@@ -108,7 +112,11 @@ int main(void) {
     teste_big_sum(a, b, c, 324234253, 345436254);
     teste_big_sum(a, b, c, -657242423, -123457568);
     teste_big_sum(a, b, c, LONG_MAX, LONG_MAX);
+    printf("\n");
+    dump(c, 16);
     teste_big_sum(a, b, c, LONG_MIN, LONG_MIN);
+    printf("\n");
+    dump(c, 16);
     teste_big_sum(a, b, c, 435434, -23423512); // subtract
     
     // Testagem big_sub()
