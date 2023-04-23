@@ -77,11 +77,28 @@ void teste_big_sum(BigInt a, BigInt b, BigInt c, long d1, long d2) {
 }
 
 void teste_big_sub(BigInt a, BigInt b, BigInt c, long d1, long d2) {
+    BigInt d;
     big_val(a, d1);
-    big_val(a, d2);
+    big_val(b, d2);
     big_sub(c, a, b);
-    big_val(a, d1 - d2);
-    compare_big(a, c);
+    big_val(d, d1 - d2);
+    compare_big(d, c);
+}
+
+void teste_big_mul(BigInt a, BigInt b, BigInt c, long d1, long d2) {
+    BigInt d;
+    big_val(a, d1);
+    big_val(b, d2);
+    big_mul(c, a, b);
+    big_val(d, d1 * d2);
+    compare_big(d, c);
+}
+
+void teste_big_shl(BigInt a, BigInt b, long d, int n) {
+    big_val(a, d);
+    big_shl(b, a, n);
+    printf("\ncaso:\n");
+    dump(b, 16);
 }
 
 int main(void) {
@@ -112,11 +129,7 @@ int main(void) {
     teste_big_sum(a, b, c, 324234253, 345436254);
     teste_big_sum(a, b, c, -657242423, -123457568);
     teste_big_sum(a, b, c, LONG_MAX, LONG_MAX);
-    printf("\n");
-    dump(c, 16);
     teste_big_sum(a, b, c, LONG_MIN, LONG_MIN);
-    printf("\n");
-    dump(c, 16);
     teste_big_sum(a, b, c, 435434, -23423512); // subtract
     
     // Testagem big_sub()
@@ -124,6 +137,29 @@ int main(void) {
     teste_big_sub(a, b, c, 1233423, 3453463);
     teste_big_sub(a, b, c, 2342234, 234);
     teste_big_sub(a, b, c, LONG_MAX, LONG_MAX);
+
+    // Testagem big_mul()
+    printf("big_mul()\n");
+    teste_big_mul(a, b, c, 123, 45);
+    teste_big_mul(a, b, c, -12234, 2342);
+    teste_big_mul(a, b, c, -12432, -2342);
+    big_val(b, LONG_MAX);
+    big_val(c, LONG_MAX);
+    big_mul(a, b, c);
+    printf("a\n");
+    dump(a, 16);
+
+    // Testagem big_shl()
+    printf("big_shl()\n");
+    teste_big_shl(a, b, 2141232, 33);
+    teste_big_shl(a, b, 23422, 3);
+    teste_big_shl(a, b, 6753635, 128);
+    teste_big_shl(a, b, 422, 0);
+    teste_big_shl(a, b, -2141232, 33);
+    teste_big_shl(a, b, -23422, 3);
+    teste_big_shl(a, b, -6753635, 128);
+    teste_big_shl(a, b, -422, 0);
+    teste_big_shl(a, b, LONG_MAX, 64);
 
 
     return 0;

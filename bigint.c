@@ -47,16 +47,64 @@ void big_sum(BigInt res, BigInt a, BigInt b){
 void big_sub(BigInt res, BigInt a, BigInt b) {
     BigInt btemp;
     big_comp2(btemp, b);
-    big_sum(res, a, b);
+    big_sum(res, a, btemp);
+}
+
+void copy_BigInt(BigInt res, BigInt a) {
+    for (int i = 0; i < 16; i++) {
+        res[i] = a[i];
+    }
 }
 
 /* res = a * b */
-void big_mul(BigInt res, BigInt a, BigInt b);
+void big_mul(BigInt res, BigInt a, BigInt b) {
+    BigInt a_aux;
+    BigInt b_aux;
+    copy_BigInt(a_aux, a);
+    copy_BigInt(b_aux, b);
+
+    long zero = 0;
+    big_val(res, zero);
+
+    int bool_a_neg = (a[15] & 0x80);
+    int bool_b_neg = (b[15] & 0x80);
+
+    if (bool_a_neg)
+        big_comp2(a_aux, a_aux);
+
+    if (bool_b_neg)
+        big_comp2(b_aux, b_aux);
+
+    int n, val, acres;
+    for (int i = 0; i < 16; i++) {
+        acres = 0;
+        for (int j = 0; j < 16; j++) {
+            val = (a_aux[i] * b_aux[j]) + res[i + j] + acres;
+            acres = (int)val / 256;
+            n = val - acres * 256;
+            res[i + j] = n;
+        }
+    }
+
+    if ((!(bool_a_neg && bool_b_neg)) && (bool_a_neg || bool_b_neg))
+        big_comp2(res, res);
+}
 
 /* Operações de Deslocamento */
 
 /* res = a << n */
-void big_shl(BigInt res, BigInt a, int n);
+void big_shl(BigInt res, BigInt a, int n) {
+    long zero = 0;
+    BigInt aux;
+    big_val(aux, zero);
+    
+    int num_bytes = (int)n / 8;
+    int num_bits = n - num_bytes * 8;
+
+    aux[num_bytes] = 1;
+    aux[num_bytes] = aux[num_bytes] << num_bits;
+    big_mul(res, a, aux);
+}
 
 /* res = a >> n (lógico)*/
 void big_shr(BigInt res, BigInt a, int n);
